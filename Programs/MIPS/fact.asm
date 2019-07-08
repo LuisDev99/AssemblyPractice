@@ -30,7 +30,7 @@ fact:
     lw      $ra, 4($sp)
 
     mult    $a0, $v0			    ; $a0 * $v0 = Hi and Lo registers
-    mflo	$v0					    ; copy Lo to $v0  ;return n * fact(n-1);
+    mflo    $v0					    ; copy Lo to $v0  ;return n * fact(n-1);
     
     addi    $sp, $sp, 8
     jr      $ra
