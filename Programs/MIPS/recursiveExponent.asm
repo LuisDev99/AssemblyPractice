@@ -24,10 +24,10 @@ exp:
     add     $a2, $zero, $a0         ;res = base    
     jal     exp_r                   ;call the recursive function
 
-    lw		$ra, 0($sp) 
+    lw	    $ra, 0($sp) 
     addi    $sp, $sp, 4		    
 
-    jr		$ra	                    ;jump to $ra
+    jr	    $ra	                    ;jump to $ra
 
 exp_r:
     addi    $sp, $sp, -4
@@ -38,8 +38,8 @@ exp_r:
 
     ;else
     addi    $a1, $a1, -1            ;exp = exp - 1
-    mult	$a0, $a2			    ;$a0 * $a1 = Hi and Lo registers
-    mflo	$a2					    ;copy Lo to $a2
+    mult    $a0, $a2			    ;$a0 * $a1 = Hi and Lo registers
+    mflo    $a2					    ;copy Lo to $a2
     jal     exp_r
 
     lw      $ra, 0($sp)
