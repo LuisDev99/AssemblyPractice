@@ -36,18 +36,18 @@ jal     gcd
 
 
 gcd:
-    bne		$a0, $a1, whileBody	    ;if $a0 != $a1 then whileBody
+    bne	    $a0, $a1, whileBody	    ;if $a0 != $a1 then whileBody
     add     $v0, $zero, $a0         ;set the return value equal to a
     jr      $ra                     ;return a
 
 whileBody:
     slt     $t0, $a1, $a0           ; t0 = b < a
     beq     $t0, $zero, elseBody    ; if b is not less than a
-    sub		$a0, $a0, $a1		    ; a = a - b;
+    sub	    $a0, $a0, $a1		    ; a = a - b;
     j       gcd
 
 elseBody:
-    sub		$a1, $a1, $a0           ; b = b - a
+    sub	    $a1, $a1, $a0           ; b = b - a
     j       gcd
 
 ;#exec "Programs/MIPS/gcd.asm"
