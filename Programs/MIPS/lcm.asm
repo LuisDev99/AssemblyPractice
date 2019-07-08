@@ -59,7 +59,7 @@ restOfFunction:
     bne     $t0, $zero, incrementMultiple   ;(minMultiple % n2 == 0)
 
     ;break
-    jr		$ra					            ;return
+    jr	    $ra					            ;return
     
 
 incrementMultiple:
