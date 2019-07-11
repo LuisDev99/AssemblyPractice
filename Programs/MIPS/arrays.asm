@@ -3,7 +3,6 @@ or      $a0, $zero, $gp                 ;move $a0, $gp
 addi    $a1, $zero, 5                   ;size of the array = 5
 
 jal traverseArray
-
 #stop
 
 
@@ -25,3 +24,5 @@ Loop:
 
 endOfLoop:
     jr $ra
+    
+;#exec "Programs/MIPS/arrays.asm"

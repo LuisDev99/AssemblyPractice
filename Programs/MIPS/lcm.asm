@@ -1,5 +1,5 @@
-addi    $a0, $zero, 930                     ;n1 
-addi    $a1, $zero, 1302                    ;n2 
+addi    $a0, $zero, 48                     ;n1 
+addi    $a1, $zero, 3568                    ;n2 
 jal lcm 
 #show $v0   
 #stop

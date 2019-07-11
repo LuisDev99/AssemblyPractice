@@ -36,8 +36,8 @@ jal     gcd
 
 
 gcd:
-    bne	    $a0, $a1, whileBody	    ;if $a0 != $a1 then whileBody
-    add     $v0, $zero, $a0         ;set the return value equal to a
+    bne	    $a0, $a1, whileBody	    ;if $a0 != $a1 then goto whileBody
+    add     $v0, $zero, $a0         ;set the return value equal to a, v0 = a0
     jr      $ra                     ;return a
 
 whileBody:
