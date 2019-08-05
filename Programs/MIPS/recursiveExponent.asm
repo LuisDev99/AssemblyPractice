@@ -52,4 +52,4 @@ returnRes:
     add     $v0, $zero, $a2         ;return res
     jr      $ra
 
-;#exec "Programs/recursiveExponent32.asm"
+;#exec "Programs/MIPS/recursiveExponent.asm"
