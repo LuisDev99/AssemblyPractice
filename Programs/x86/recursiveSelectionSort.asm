@@ -29,6 +29,13 @@ call main
 ;    }
 ;}
 
+
+
+;DOESNT WORK, FIND THE BUG! :D GOOD LUCK
+
+
+
+
 get_min:
     ;epilogo
     push    ebp
@@ -116,7 +123,7 @@ main:
     
     push    ebp
     mov     ebp, esp
-    sub     esp, 24         ;PORQUE ES VARIABLE LOCAL
+    sub     esp, 24         ;Because its a local variable
 
     mov [ebp - 24], 3
     mov [ebp - 20], 20

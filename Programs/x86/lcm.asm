@@ -93,7 +93,7 @@ main:
 
     #show eax
 
-    add esp, 4
+    add esp, 8
     ret
 
 ;#exec "Programs/x86/lcm.asm"

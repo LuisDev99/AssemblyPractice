@@ -1,0 +1,112 @@
+X86
+
+Literatura o Investigacion
+
+	DOS
+
+	Cuando se hace un push, el stack pointer se resta
+
+
+CISC
+
+-Registros de propositos general -> 32 bits 
+
+   - 6 registros 
+   - eax, ebx, ecx, edx, esi, edi           (esi -> source, edi -> dource)  *SUPER INSTRUCCIONES; MUEVEN UN MUNTON DE PALABRAS; INVESTIGAR
+
+
+-Instrucciones con 2 operandos, usualmente
+
+	* Registro, constante, referencia memoria
+	* No se aceptan dos operandos como referencia a memoria
+	* El primer operando es el primer destino
+
+-Instruccion MOV
+	
+* ES LITTLE ENDIAN
+0x1000000 = 0xaabbccdd
+
+mov eax, word[0x1000000] -> retornara 0xccdd
+
+	DWORD -> 32 bits
+	WORD  -> 16 bits
+	BYTE  -> 8 bits
+
+	* Mover datos de un origen a un destino
+	* mov eax, 200
+	* mov ebx, 100
+	* add eax, ebx
+	* add eax, 200
+
+	*Referencia a memoria
+
+	* mov [0x10000000], 100
+	* #show dword[0x10000000]
+	* mov eax, 0xaabbccdd
+	* mov [0x1000000], eax
+	* mov ebx, word[0x1000000] -> error, porque estamos cargando 16 bits a un reg de 32 bits
+	* movzx ebx, word[0x1000000] -> solucion, move zero extension
+	* mov dword [eax + 4], 0x11223344 -> Escribir en el destino de esa memoria, la constante (destino, source)
+	* mov ebx, dword [eax+2]
+	* movzx ebx, byte[eax+4]
+	* no se puede mov con los dos argumentos con referencia a memoria
+
+	
+	
+	Instrucciones de flujo de control
+
+	* jmp label o jmp eax
+	* je / jl / jg / jle / jge 	<label>    con signo
+	* 	/  jb / ja / jbe / jae  <label>    sin signo
+	* investigar los demas jumps
+
+	* SI ESTAMOS COMPARANDO NUMEROS CON SIGNO; HAY QUE ESTAR PENDIENTE DE LAS OF, SF, ZF
+
+	* sete / setl / setg / setle / setge     <registro 8 bits> pone true or false el registro
+	* cmp -> compare -> Recibe 2 argumentos, resta los dos argumentos y setea los registro EFLAGS (son un munton)
+	 zero flag, overflow flag, signed flag	, carry flag
+
+
+	 Registros
+	* eax, ebx, ecx, edx
+			31		15		  0
+	32 bits [       ] ah ] al ]        eax
+
+
+	FUNCIONES
+
+	* Argumentos en la pila
+	* Instrucciones utiles
+		* push -> Empujar un argumento en el tope de la pila (add el sp, sw en MIPS)
+		* pop  -> Retirar un argumento del tope de la pila	(lw, restar el sp en MIPS)
+		* call -> Llamar a una funcion y guardar la direccion de retorno en el tope de la pila (jal)
+		* ret  -> Obtener el argumento del tope de la pila y saltar a dicha direccion
+
+		Convenio de las funciones y argumentos
+
+		* Se guarda de derecha a izquierda los argumentos
+		8 : f(a,b c)  => [ 12  ]
+		12: 			 [ A  ]
+						 [ B  ]
+						 [ C  ]
+
+		ret
+
+
+
+		# LLamar funciones nativas
+
+		#import "libc.so.6":libc        -> Traer printF
+		call @libc.printf:"si32,p"		-> llamar a printf, lo que esta entre comillas son los argumentos, si32 es para pasar un entero de 32 bits, p es para pasar un string, un puntero 
+		
+		isprime:
+    	mov eax, 0              ;flag = 0
+	
+    	mov ebx, 2              ;i = 2
+    	sete 
+	
+    	//Para dividir
+    	mov eax, 4
+    	mov ebx, 2
+    	cdq                 ; cdq hace extension de signo de eax a edx 
+    	idiv ebx            ; 4/2

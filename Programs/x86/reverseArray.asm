@@ -105,7 +105,7 @@ end_of_reverse:
 main:
     push ebp
     mov ebp, esp
-    sub     esp, 24         ;PORQUE ES VARIABLE LOCAL
+    sub     esp, 24         ;Because the array is being created inside a local scope
 
     mov [ebp - 24], 1
     mov [ebp - 20], 2
@@ -115,10 +115,10 @@ main:
     mov [ebp - 4], 6
 
     push 6
-    lea eax, [ebp - 24]     ;PASAR LA DIRECCION EFECTIVA A EAX DE EBP
+    lea eax, [ebp - 24]     ;Load the effective (lea) address of the first element of the array and pass it as parameter
     push eax
 
-    ;old
+    ;Old way of doing this, never do this
     ;push 0x10000000
     ;mov [0x10000000], 1
     ;mov [0x10000004], 2
@@ -133,22 +133,24 @@ main:
 
     push 5
     push 0
-    lea eax, [ebp - 24]     ;PASAR LA DIRECCION EFECTIVA A EAX DE EBP
+    lea eax, [ebp - 24]     ;Load the effective (lea) address of the first element of the array and pass it as parameter
     push eax
     call reverseArray
 
     add esp, 12                 ;reset
 
-    #set byte [0x10000018] = ["Reversed array is ", 10, 0]
+    #set byte [0x10000018] = ["Reversed array is ", 10, 0] ;the string that printf will print out
     push 0x10000018
     call @libc.printf:"p"
 
     add esp, 4
 
     push 6
-    lea eax, [ebp - 24]     ;PASAR LA DIRECCION EFECTIVA A EAX DE EBP
+    lea eax, [ebp - 24]     ;Load the effective (lea) address of the first element of the array and pass it as parameter
     push eax
     call printArray 
+
+    ;The stack is unbalanced!!! Balance it
 
     ret 
 

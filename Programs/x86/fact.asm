@@ -10,6 +10,15 @@ call main
 ;   }                                            |
 ;------------------------------------------------|
 
+
+
+
+;DOESNT WORK, ITS YOUR JOB TO FIND THE BUG :D GOOD LUCK
+
+
+
+
+
 fact:
     ;epilogue
     push    ebp
