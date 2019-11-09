@@ -10,51 +10,55 @@ call main
 ;   }                                            |
 ;------------------------------------------------|
 
+
 fact:
     ;epilogue
     push    ebp
     mov     ebp, esp
 
-    
     ;if(n == 0 || n == 1)
     cmp     [ebp + 8], 0
-    je      return_1
+    je      return1
 
     cmp     [ebp + 8], 1
-    je      return_1
+    je      return1
 
     ;else
-    mov     ebx, [ebp + 8]
-    dec     ebx                         ;n-1
-    push    ebx
+    dec     [ebp + 8]               ;n-1
+    push    [ebp + 8]
     call    fact
 
     ;prologue
     mov     esp, ebp
     pop     ebp
-    ;pop     esi
+    pop     ecx
 
-    imul    eax, [ebp + 8]
-    #show eax
-    ret     
+    ;#show [ebp + 8]
 
-return_1:
+    imul    eax, [ebp + 8]          ;eax = n * fact(n - 1)
 
-    mov     eax, 1
+    ret
+
+return1:
+    mov     eax, 4                  ;return 1
+
+    jle return1
 
     ;prologue
     mov     esp, ebp
     pop     ebp
-
+    pop     ecx
+    
     ret
+    
 
 main:
     push    4
     call    fact
-    pop     eci
+    pop     ecx
 
-    #show eax
+    #show eax hex
 
     ret
 
-;#exec "Programs/x86/fact.asm"
+;#exec "Programs/x86/recursiveFactorial.asm"
